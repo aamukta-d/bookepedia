@@ -1,3 +1,8 @@
+from django.contrib import admin 
+from django.urls import path 
+from django.urls import include 
+from bookapp import views
+
 """bookepedia URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -17,5 +22,6 @@ from django.contrib import admin
 from django.urls import path
 
 urlpatterns = [
+    path('bookepedia/', include ('bookapp.urls')),
     path('admin/', admin.site.urls),
 ]
