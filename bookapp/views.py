@@ -4,4 +4,4 @@ from django.http import HttpResponse
 # Create your views here.
 
 def homepage(request):
-    return HttpResponse("this is the homepage")
+    return render(request, 'bookepedia/homepage.html')
