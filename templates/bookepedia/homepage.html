@@ -11,8 +11,12 @@
     <div class="container">
         <img src="{% static 'images/logo.jpg' %}" class="logo"/>
         <div class="buttons">
-            <button class="add_a_book">&#x1F4D6; Add a Book</button>
+            <a href="{% url 'bookepedia:add_a_book' %}">
+                <button class="add_a_book">&#x1F4D6; Add a Book</button>
+            </a>
             <button class="my_profile">&#x1F464; My Profile</button>
         </div>
     </div>
 {% endblock %}
+
+
