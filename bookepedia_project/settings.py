@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'bookepedia.urls'
+ROOT_URLCONF = 'bookepedia_project.urls'
 
 TEMPLATES = [
     {
@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'bookepedia.wsgi.application'
+WSGI_APPLICATION = 'bookepedia_project.wsgi.application'
 
 
 # Database

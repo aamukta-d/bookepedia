@@ -1,0 +1,29 @@
+.container{
+    position: relative;
+}
+
+.buttons{
+    position: absolute; /* Position the buttons relative to the container */
+    top: 50%; /* Position the buttons vertically centered */
+    
+    right: 5%;
+    transform: translateY(-50%); /* Center the buttons precisely */
+}
+
+.buttons button{
+    margin: 10px; /* Add some space between the buttons */
+    font-size: 14px;
+    font-family: "Times New Roman", Times, serif;
+    background-color: white; /* Blue color */
+    color: black;
+    padding: 10px 20px; /* Add padding to make the button larger */
+    border: 1px solid black; /* Remove default border */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: transform 0.3s; /* Smooth transition effect */
+}
+
+.buttons button:hover{
+    background-color: lightgray; /* Darker blue color on hover */
+    transform: scale(1.1); /* Enlarge the button on hover */
+}

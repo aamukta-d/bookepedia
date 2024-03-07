@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bookepedia.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bookepedia_project.settings')
 
 application = get_wsgi_application()

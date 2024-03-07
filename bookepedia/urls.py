@@ -1,5 +1,5 @@
 from django.urls import path
-from bookepedia_project import views
+from bookepedia import views
 
 app_name = 'bookepedia'
 

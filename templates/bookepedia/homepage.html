@@ -1,13 +1,18 @@
-<!DOCTYPE html>
-{% load staticfiles %}
+{% extends 'bookepedia/base.html' %} 
+{%load staticfiles%}
+{% block title_block %} 
+    Homepage
+{% endblock %}
 
-<html>
+{% block body_block %}
     <head>
-        <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/homepage_style.css' %}">
     </head>
-    <body>
-        <div class = "container">
-    <img src="{% static 'images/picture.jpg' %}" />
-    <a href="/rango/AddABook/">Add A Book</a><br />
-    </body>
-</html>
+    <div class="container">
+        <img src="{% static 'images/logo.jpg' %}" class="logo"/>
+        <div class="buttons">
+            <button class="add_a_book">&#x1F4D6; Add a Book</button>
+            <button class="my_profile">&#x1F464; My Profile</button>
+        </div>
+    </div>
+{% endblock %}
