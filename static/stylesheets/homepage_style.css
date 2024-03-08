@@ -3,18 +3,18 @@
 }
 
 .buttons{
-    position: absolute; /* Position the buttons relative to the container */
-    top: 50%; /* Position the buttons vertically centered */
+    position: absolute; 
+    top: 50%; 
     
     right: 5%;
-    transform: translateY(-50%); /* Center the buttons precisely */
+    transform: translateY(-50%); 
 }
 
 .buttons button{
     margin: 10px; /* Add some space between the buttons */
     font-size: 14px;
     font-family: "Times New Roman", Times, serif;
-    background-color: white; /* Blue color */
+    background-color: white; 
     color: black;
     padding: 10px 20px; /* Add padding to make the button larger */
     border: 1px solid black; /* Remove default border */
@@ -24,6 +24,6 @@
 }
 
 .buttons button:hover{
-    background-color: lightgray; /* Darker blue color on hover */
+    background-color: lightgray;
     transform: scale(1.1); /* Enlarge the button on hover */
 }
