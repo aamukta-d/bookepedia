@@ -1,0 +1,48 @@
+{% extends 'bookepedia/base.html' %} 
+{%load staticfiles%}
+{% block title_block %}
+Register Page
+{% endblock %}
+
+{% block body_block %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/register_style.css' %}">
+</head>
+    <div class="container">
+        
+        <img src="{% static 'images/Welcome.jpg' %}" class="registerLogo"/>
+        <div class = "all_inputs">
+            <label for="username">Username: </label>
+            <input type="text" id="username" name="username">
+            </div>
+
+        <div class = "all_inputs">
+            <label for="email">Email: </label>
+            <input type="text" id="email" name="email">
+            </div>
+        
+            <div class = "all_inputs">
+                <label for="email">Password: </label>
+                <input type="text" id="password" name="password">
+                </div>
+
+            <div class="dropdown">
+                <label for="drop">Your Top Genres </label>
+                <select name="genres" id="genres">
+                <option value="Fantasy">Fantasy</option>
+                <option value="Action">Action</option>
+                <option value="Drama">Drama</option>
+                <option value="Sci-Fi">Sci-Fi</option>
+                <option value="Romance">Romance</option>
+                </select>
+                </div>
+
+            <div class="button">
+                <input type="submit" value="Create Account">
+                </div>
+            
+            <div class="login">
+
+                Already have an account? <a href="/bookepedia/Login">Log In</a> instead!
+        </div>   
+{% endblock %}

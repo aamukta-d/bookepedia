@@ -1,0 +1,72 @@
+.container {
+    position: relative;
+    width: 100%; /* adjust as needed */
+    height: 100vh; /* adjust as needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* align at the top */
+    align-items: center; /* center horizontally */
+   
+}
+
+.all_inputs {
+    margin-top: 20px; /* adjust as needed */
+    margin-bottom: 20px;
+    width: 75%; /* adjust as needed */
+    max-width: 400px; /* adjust as needed */
+    display: flex;
+    align-items: center;
+}
+
+.all_inputs label {
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 24px; /* adjust as needed */
+}
+
+.all_inputs input[type="text"] {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    border: 2.5px solid #000000;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 24px; /* adjust as needed */
+    outline: none;
+}
+
+.dropdown label {
+    font-size: 24px; /* adjust as needed */
+}
+
+.dropdown {
+    width: 100%;
+    max-width: 300px; /* Adjust as needed */
+    margin-bottom: 20px;
+}
+
+.dropdown select {
+    width: 100%;
+    padding: 10px;
+    border: 2.5px solid #000000;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 24px;
+    outline: none;
+    max-width: 100%;
+}
+
+.button {
+    width: 100%;
+    max-width: 300px;
+    text-align: center; /* Center the button */
+}
+
+.button input[type="submit"] {
+    padding: 8px 16px; /* Adjust padding as needed */
+    border: 2px solid #000000; /* Make the border bold */
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+}

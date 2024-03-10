@@ -25,3 +25,6 @@ def add_a_book(request):
 
     return render(request, 'bookepedia/add_a_book.html', {'form': form})
 
+def register(request):
+    return render(request, 'bookepedia/Registration.html')
+
