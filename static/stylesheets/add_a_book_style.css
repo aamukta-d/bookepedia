@@ -1,0 +1,66 @@
+/* Style the container */
+.form {
+    width: 50%;
+    margin: 0 auto;
+}
+
+/* Style labels */
+label {
+    display: block;
+    font-weight: bold;
+}
+
+/* Style input fields */
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333; /* Default text color */
+}
+
+.form-text {
+    font-size: 12px;
+    color: #999; /* Grey color for help text */
+}
+
+/* Style input fields with help text */
+input[type="text"].has-help-text::placeholder,
+textarea.has-help-text::placeholder {
+    color: #999; /* Grey color for placeholder text */
+}
+
+/* Add class to input fields with help text */
+input[type="text"].has-help-text,
+textarea.has-help-text {
+    padding-bottom: 20px; /* Adjust padding for space to display help text */
+}
+
+/* Style error messages */
+.error-message {
+    color: red;
+}
+
+/* Style help text */
+.form-text {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12px;
+    color: #666;
+}
+
+/* Style submit button */
+.submit_button {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    background-color: white;
+    color: black;
+    border: 1px solid black; /* Remove default border */
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submit_button:hover {
+    background-color: rgba(155, 231, 240, 0.506);
+}

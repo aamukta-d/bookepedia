@@ -1,22 +1,30 @@
-{%extends 'bookepedia/base.html'%} 
+{% extends 'bookepedia/base.html' %} 
+{%load staticfiles%}
 {% block title_block %} 
     Add a Book
 {% endblock %}
 
 {% block body_block %}
-    <h1>Add a Book</h1>   
-    <div>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/add_a_book_style.css' %}">
+    </head>
+    <div class="header">
+        <h1>Add a Book</h1>  
+    </div>   
+    <div class ="form">
         <form id="book_form" method="post" action="{% url 'bookepedia:add_a_book' %}"> 
             {% csrf_token %}
             {% for hidden in form.hidden_fields %}
                 {{ hidden }}
             {% endfor %}
             {% for field in form.visible_fields %}
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                 {{ field.errors }}
                 {{ field.help_text }}
                 {{ field }}
             {% endfor %}
-            <input type="submit" name="submit" value="Create Book" /> 
+            
+            <button type="submit" name="submit" class="submit_button">Create Book</button>
         </form>
     </div>
 {% endblock %}
