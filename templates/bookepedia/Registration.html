@@ -1,51 +1,72 @@
 {% extends 'bookepedia/base.html' %} 
-{%load staticfiles%}
-{% block title_block %}
-Register Page
+{% load staticfiles %}
+{% block title_block %} 
+    Register
 {% endblock %}
 
 {% block body_block %}
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/register_style.css' %}">
 </head>
-    <div class="container">
-        
-        <img src="{% static 'images/Welcome.jpg' %}" class="registerLogo"/>
-        <form id="user_form" method="post" action="{% url 'bookepedia:register' %}" enctype="multipart/form-data">
+<div class="container">
+    <img src="{% static 'images/Welcome.jpg' %}" class="registerLogo"/>
+    <div class="form">
+        <form id="user_form" method="post" action="{% url 'bookepedia:register' %}" enctype="multipart/form-data"> 
             {% csrf_token %}
-        <div class = "all_inputs">
-            <label for="username">Username: </label>
-            <input type="text" id="username" name="username">
+            
+            <div class="all_inputs">
+                {{ user_form.username.label_tag }}
+                {{ user_form.username }}
+                {% if user_form.username.errors %}
+                    <div class="error">{{ user_form.username.errors }}</div>
+                {% endif %}
             </div>
 
-        <div class = "all_inputs">
-            <label for="email">Email: </label>
-            <input type="text" id="email" name="email">
-            </div>
-        
-        <div class = "all_inputs">
-            <label for="password">Password: </label>
-            <input type="text" id="password" name="password">
-            </div>
-        
-        <div class="genre_box">
-            <label for="genres">Your Top Genres</label>
-            <form id="genres">
-                <label class="genre-label"><input type="checkbox" name="genres" value="Fantasy"> Fantasy</label>
-                <label class="genre-label"><input type="checkbox" name="genres" value="Action"> Action</label>
-                <label class="genre-label"><input type="checkbox" name="genres" value="Drama"> Drama</label>
-                <label class="genre-label"><input type="checkbox" name="genres" value="Sci-Fi"> Sci-Fi</label>
-                <label class="genre-label"><input type="checkbox" name="genres" value="Romance"> Romance</label>
-                </form>
+            <div class="all_inputs">
+                {{ user_form.email.label_tag }}
+                {{ user_form.email }}
+                {% if user_form.email.errors %}
+                    <div class="error">{{ user_form.email.errors }}</div>
+                {% endif %}
             </div>
 
-            <div class="button">
-                <input type="submit" value="Create Account">
+            <div class="all_inputs">
+                {{ user_form.password.label_tag }}
+                {{ user_form.password }}
+                {% if user_form.password.errors %}
+                    <div class="error">{{ user_form.password.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="genre_box">
+                <label>Your Top Genres</label>
+                <div class="genres">
+                    {% for genre_value, genre_label in profile_form.top_genre.field.choices %}
+                        <label class="genre-label">
+                            <input type="checkbox" name="top_genre" value="{{ genre_value }}"
+                                   {% if genre_value in profile_form.top_genre.value %} checked {% endif %}>
+                            {{ genre_label }}
+                        </label>
+                    {% endfor %}
+                    {% if profile_form.top_genre.errors %}
+                        <div class="error">{{ profile_form.top_genre.errors }}</div>
+                    {% endif %}
                 </div>
-            </form>
-                
-            <div class="login">
-
-                Already have an account? <a href="/bookepedia/Login">Log In</a> instead!
-        </div>   
+            </div>  
+            
+            <div class= "all_inputs">
+                {{ profile_form.picture.label_tag }}
+                {{ profile.picture }}
+                {% if profile_form.picture.errors %}
+                    <div class="error">{{ profile_form.password.errors }}</div>
+                {% endif %}
+            </div>
+    
+            <button type="submit" name="submit" class="submit_button">Create Account</button>
+        </form>
+        <div class="login">
+            Already have an account? <a href="/bookepedia/Login">Log In</a> instead!
+        </div> 
+    </div>
+</div>
 {% endblock %}

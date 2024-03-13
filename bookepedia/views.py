@@ -4,6 +4,7 @@ from bookepedia.forms import BookForm
 from django.shortcuts import redirect
 from bookepedia.forms import UserForm, UserProfileForm
 from django.contrib.auth.models import User
+from .models import Genre
 
 # Create your views here.
 
@@ -17,9 +18,8 @@ def add_a_book(request):
         form = BookForm(request.POST)
 
     if form.is_valid():
-    # Save the new category to the database. 
+   
         form.save(commit=True)
-    # Now that the category is saved, we could confirm this. # For now, just redirect the user back to the index view. 
         return redirect('/bookepedia/')
     
     else:
@@ -29,8 +29,6 @@ def add_a_book(request):
 
 def register(request):
     registered = False
-    user_form = UserForm()
-    profile_form = UserProfileForm()
 
     if request.method == 'POST':
         user_form = UserForm(request.POST)
@@ -46,21 +44,38 @@ def register(request):
                     'error_message': 'Username is already taken'
                 })
             
-            user = user_form.save(commit=False)
-            user.set_password(user.cleaned_data['password'])
+            user = user_form.save()
+            user.set_password(user.password)
             user.save()
 
             profile = profile_form.save(commit=False)
             profile.user = user
 
+            if 'picture' in request.FILES:
+                profile.picture = request.FILES['picture'] 
+
+            profile.save()
+
             if 'top_genre' in request.POST:
-                profile.top_genre = request.POST['top_genre']
+                selected_genre_names = request.POST.getlist('top_genre')  # Assuming 'top_genre' is a multi-select field in your form
                 
+                # Retrieve Genre objects based on the selected genre names
+                selected_genres = Genre.objects.filter(name__in=selected_genre_names)
+                
+                # Set the selected genres for the UserProfile instance
+                profile.top_genre.set(selected_genres)
+
             profile.save()
 
             registered = True
+
+
         else:
             print(user_form.errors, profile_form.errors)
+
+    else:
+        user_form = UserForm()
+        profile_form = UserProfileForm()
 
     return render(request, 'bookepedia/registration.html', 
     {
