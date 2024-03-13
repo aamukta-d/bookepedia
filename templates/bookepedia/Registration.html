@@ -11,6 +11,8 @@ Register Page
     <div class="container">
         
         <img src="{% static 'images/Welcome.jpg' %}" class="registerLogo"/>
+        <form id="user_form" method="post" action="{% url 'bookepedia:register' %}" enctype="multipart/form-data">
+            {% csrf_token %}
         <div class = "all_inputs">
             <label for="username">Username: </label>
             <input type="text" id="username" name="username">
@@ -21,26 +23,27 @@ Register Page
             <input type="text" id="email" name="email">
             </div>
         
-            <div class = "all_inputs">
-                <label for="email">Password: </label>
-                <input type="text" id="password" name="password">
-                </div>
-
-            <div class="dropdown">
-                <label for="drop">Your Top Genres </label>
-                <select name="genres" id="genres">
-                <option value="Fantasy">Fantasy</option>
-                <option value="Action">Action</option>
-                <option value="Drama">Drama</option>
-                <option value="Sci-Fi">Sci-Fi</option>
-                <option value="Romance">Romance</option>
-                </select>
-                </div>
+        <div class = "all_inputs">
+            <label for="password">Password: </label>
+            <input type="text" id="password" name="password">
+            </div>
+        
+        <div class="genre_box">
+            <label for="genres">Your Top Genres</label>
+            <form id="genres">
+                <label class="genre-label"><input type="checkbox" name="genres" value="Fantasy"> Fantasy</label>
+                <label class="genre-label"><input type="checkbox" name="genres" value="Action"> Action</label>
+                <label class="genre-label"><input type="checkbox" name="genres" value="Drama"> Drama</label>
+                <label class="genre-label"><input type="checkbox" name="genres" value="Sci-Fi"> Sci-Fi</label>
+                <label class="genre-label"><input type="checkbox" name="genres" value="Romance"> Romance</label>
+                </form>
+            </div>
 
             <div class="button">
                 <input type="submit" value="Create Account">
                 </div>
-            
+            </form>
+                
             <div class="login">
 
                 Already have an account? <a href="/bookepedia/Login">Log In</a> instead!

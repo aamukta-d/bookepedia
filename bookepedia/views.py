@@ -68,4 +68,3 @@ def register(request):
         'profile_form': profile_form,
         'registered': registered
     })
-
