@@ -43,8 +43,8 @@
                 <div class="genres">
                     {% for genre in genres %}
                         <label class="genre-label">
-                            <input type="checkbox" name="top_genre" value="{{ Genre }}"
-                                   {% if genre_value in profile_form.cleaned_data.top_genre %} checked {% endif %}>
+                            <input type="checkbox" name="top_genre" value="{{ genre.name }}"
+                                   {% if genre.name in profile_form.cleaned_data.top_genre %} checked {% endif %}>
                             {{ genre.name }}
                         </label>
                     {% endfor %}

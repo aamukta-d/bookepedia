@@ -22,9 +22,11 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'password',)
 
 class UserProfileForm(forms.ModelForm): 
+    genres = Genre.objects.all()
 
     top_genre = forms.MultipleChoiceField(
-        choices = Genre.objects.all(),
+        
+        choices = [(genre.name, genre.name) for genre in genres],
         widget = forms.CheckboxSelectMultiple
     )
     
