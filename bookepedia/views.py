@@ -6,6 +6,11 @@ from bookepedia.forms import UserForm, UserProfileForm
 from django.contrib.auth.models import User
 from .models import Genre
 
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponse
+from django.urls import reverse
+from django.shortcuts import redirect
+from django.contrib import messages
 # Create your views here.
 
 def homepage(request):
@@ -87,3 +92,24 @@ def register(request):
         'registered': registered,
         'genres': genres
     })
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+                login(request, user)
+                return redirect(reverse('bookepedia:homepage'))  
+            else:
+                messages.error(request, "Your account is disabled.")
+        else:
+            messages.error(request, "Invalid login details provided.")
+
+        return redirect(reverse('bookepedia:register'))
+        
+
+    return render(request, 'bookepedia/Login.html')
