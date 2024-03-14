@@ -2,7 +2,8 @@ from django import forms
 from .models import Book
 from django.contrib.auth.models import User
 from bookepedia.models import UserProfile
-from .models import GENRE_CHOICES
+from bookepedia.models import Genre
+
 
 class BookForm(forms.ModelForm):
     title = forms.CharField(max_length=128, help_text="Please enter the title of the book.")
@@ -23,8 +24,8 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm): 
 
     top_genre = forms.MultipleChoiceField(
-        choices = GENRE_CHOICES,
-        widget=forms.CheckboxSelectMultiple
+        choices = Genre.objects.all(),
+        widget = forms.CheckboxSelectMultiple
     )
     
     class Meta:

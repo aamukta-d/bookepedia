@@ -41,18 +41,18 @@
             <div class="genre_box">
                 <label>Your Top Genres</label>
                 <div class="genres">
-                    {% for genre_value, genre_label in profile_form.top_genre.field.choices %}
+                    {% for genre in genres %}
                         <label class="genre-label">
-                            <input type="checkbox" name="top_genre" value="{{ genre_value }}"
-                                   {% if genre_value in profile_form.top_genre.value %} checked {% endif %}>
-                            {{ genre_label }}
+                            <input type="checkbox" name="top_genre" value="{{ Genre }}"
+                                   {% if genre_value in profile_form.cleaned_data.top_genre %} checked {% endif %}>
+                            {{ genre.name }}
                         </label>
                     {% endfor %}
-                    {% if profile_form.top_genre.errors %}
-                        <div class="error">{{ profile_form.top_genre.errors }}</div>
+                    {% if profile_form.errors.top_genre %}
+                        <div class="error">{{ profile_form.errors.top_genre }}</div>
                     {% endif %}
                 </div>
-            </div>  
+            </div>                 
             
             <div class= "all_inputs">
                 {{ profile_form.picture.label_tag }}

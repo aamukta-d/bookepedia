@@ -28,6 +28,9 @@ def add_a_book(request):
     return render(request, 'bookepedia/add_a_book.html', {'form': form})
 
 def register(request):
+
+    genres = Genre.objects.all()
+
     registered = False
 
     if request.method == 'POST':
@@ -81,5 +84,6 @@ def register(request):
     {
         'user_form': user_form,
         'profile_form': profile_form,
-        'registered': registered
+        'registered': registered,
+        'genres': genres
     })
