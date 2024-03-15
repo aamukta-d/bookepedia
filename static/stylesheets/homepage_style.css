@@ -24,6 +24,6 @@
 }
 
 .buttons button:hover{
-    background-color: lightgray;
+    background-color: rgba(155,232,240,0.5);
     transform: scale(1.1); /* Enlarge the button on hover */
 }

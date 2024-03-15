@@ -5,10 +5,11 @@
 {% endblock %}
 
 {% block body_block %}
-<head>
-    <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/register_style.css' %}">
-</head>
+
 <div class="container">
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/register_style.css' %}">
+    </head>
     <img src="{% static 'images/Welcome.jpg' %}" class="registerLogo"/>
     <div class="form">
         <form id="user_form" method="post" action="{% url 'bookepedia:register' %}" enctype="multipart/form-data"> 
@@ -54,9 +55,9 @@
                 </div>
             </div>                 
             
-            <div class= "all_inputs">
+            <div class = "all_inputs">
                 {{ profile_form.picture.label_tag }}
-                {{ profile.picture }}
+                {{ profile_form.picture }}
                 {% if profile_form.picture.errors %}
                     <div class="error">{{ profile_form.password.errors }}</div>
                 {% endif %}
@@ -65,7 +66,7 @@
             <button type="submit" name="submit" class="submit_button">Create Account</button>
         </form>
         <div class="login">
-            Already have an account? <a href="/bookepedia/login">Log In</a> instead!
+            Already have an account? <a href="{% url 'bookepedia:user_login' %}">Log In</a> instead!
         </div> 
     </div>
 </div>

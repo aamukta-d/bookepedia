@@ -24,4 +24,6 @@ from django.urls import path
 urlpatterns = [
     path('bookepedia/', include ('bookepedia.urls')),
     path('admin/', admin.site.urls),
+    path('book/<slug:book_title_slug>/',
+         views.show_book, name='show_book'),
 ]

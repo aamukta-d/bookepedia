@@ -12,7 +12,7 @@ class BookForm(forms.ModelForm):
 
     class Meta:
         model = Book
-        fields = ('title', 'author', 'description', 'genre')
+        fields = ('title', 'author', 'description', 'genre', 'cover')
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -22,14 +22,14 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'password',)
 
 class UserProfileForm(forms.ModelForm): 
-    genres = Genre.objects.all()
-
     top_genre = forms.MultipleChoiceField(
-        
-        choices = [(genre.name, genre.name) for genre in genres],
         widget = forms.CheckboxSelectMultiple
     )
     
+    def __init__(self, *args, **kwargs):
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+        self.fields['top_genre'].choices = [(genre.name, genre.name) for genre in Genre.objects.all()]
+
     class Meta:
         model = UserProfile
         fields = ('picture', 'top_genre',)

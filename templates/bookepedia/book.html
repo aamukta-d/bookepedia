@@ -1,0 +1,15 @@
+{% block title_block %}
+    {% if book %}
+        {{ book.name }}
+    {% else %}
+        Unknown Boook
+    {% endif %}
+{% endblock %}
+
+{% block body_block %}
+    {% if book %}
+    <h1>{{ book.name }}</h1>
+    {% else %}
+    The specified category does not exist.
+    {% endif %}
+{% endblock %}

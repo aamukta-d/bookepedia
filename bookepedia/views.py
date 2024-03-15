@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from bookepedia.forms import UserForm, UserProfileForm
 from django.contrib.auth.models import User
 from .models import Genre
-
+from .models import Book
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.urls import reverse
@@ -14,7 +14,10 @@ from django.contrib import messages
 # Create your views here.
 
 def homepage(request):
-    return render(request, 'bookepedia/homepage.html')
+    context_dict = {}
+    context_dict['logged_in'] = request.user.is_authenticated
+    
+    return render(request, 'bookepedia/homepage.html', context = context_dict)
 
 def add_a_book(request):
     form = BookForm()
@@ -22,15 +25,29 @@ def add_a_book(request):
     if request.method == 'POST':
         form = BookForm(request.POST)
 
-    if form.is_valid():
-   
-        form.save(commit=True)
-        return redirect('/bookepedia/')
+        if form.is_valid():
+
+            if 'cover' in request.FILES:
+                form.cover = request.FILES['cover'] 
     
-    else:
-        print(form.errors)
+            form.save(commit=True)
+            return redirect('/bookepedia/')
+           
+        else:
+            print(form.errors)
 
     return render(request, 'bookepedia/add_a_book.html', {'form': form})
+
+def show_book(request, book_title_slug):
+    context_dict = {}
+    try:
+        category = Book.objects.get(slug=book_title_slug)
+        context_dict['book'] = category
+
+    except Book.DoesNotExist:
+        context_dict['book'] = None
+
+    return render(request, 'bookepedia/book.html', context=context_dict)
 
 def register(request):
 
@@ -65,7 +82,7 @@ def register(request):
             profile.save()
 
             if 'top_genre' in request.POST:
-                selected_genre_names = request.POST.getlist('top_genre')  # Assuming 'top_genre' is a multi-select field in your form
+                selected_genre_names = request.POST.getlist('top_genre')  
                 
                 # Retrieve Genre objects based on the selected genre names
                 selected_genres = Genre.objects.filter(name__in=selected_genre_names)

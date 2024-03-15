@@ -17,13 +17,21 @@
     align-items: center;
 }
 
-.all_inputs label {
+.all_inputs label,
+.genre_box {
     margin-right: 10px;
     font-weight: bold;
-    font-size: 24px; 
+    font-size: 24px;  
 }
 
-.all_inputs input[type="text"] {
+.genre-label{
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 12px;  
+}
+.all_inputs input[type="text"],
+.all_inputs input[type="email"],
+.all_inputs input[type="password"]{
     width: 100%;
     max-width: 300px;
     padding: 10px;
