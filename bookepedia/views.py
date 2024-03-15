@@ -26,7 +26,6 @@ def add_a_book(request):
         form = BookForm(request.POST)
 
         if form.is_valid():
-
             if 'cover' in request.FILES:
                 form.cover = request.FILES['cover'] 
     
@@ -39,15 +38,8 @@ def add_a_book(request):
     return render(request, 'bookepedia/add_a_book.html', {'form': form})
 
 def show_book(request, book_title_slug):
-    context_dict = {}
-    try:
-        category = Book.objects.get(slug=book_title_slug)
-        context_dict['book'] = category
-
-    except Book.DoesNotExist:
-        context_dict['book'] = None
-
-    return render(request, 'bookepedia/book.html', context=context_dict)
+    book = Book.objects.get(slug=book_title_slug)
+    return render(request, 'bookepedia/book.html', {'book':book})
 
 def register(request):
 
