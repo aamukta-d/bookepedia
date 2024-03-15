@@ -6,6 +6,10 @@
 {% endblock %}
 
 {% block body_block %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/login_style.css' %}">
+</head>
+<img src="{% static 'images/login.jpg' %}" class="Loginlogo"/>
 <form id="login_form" method="post" action="{% url 'bookepedia:user_login' %}">
     {% csrf_token %}
     Username: <input type="text" name="username" value="" size="50" />
