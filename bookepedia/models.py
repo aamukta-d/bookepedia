@@ -13,6 +13,7 @@ class Book(models.Model):
     author = models.CharField(max_length=128, blank=True)
     description = models.CharField(max_length=2000, blank=True)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE) 
+    cover = models.ImageField(upload_to='book_covers', blank = True)
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
