@@ -1,14 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'bookepedia/base.html' %} 
+{%load staticfiles%}
+{% block title_block %} 
+    {{ book.title}}
+{% endblock %}
+
+{% block body_block%}
 <head>
     <meta charset="UTF-8">
-    <title>{{ book.title }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/book_style.css' %}">
 </head>
 <body>
+    <div>
+        <a href="{% url 'bookepedia:homepage' %}"><button class="homepage"> Back to Bookepedia Home</button></a>
+        <!-- Wrap in if logged in statment-->
+        <a href="#"><button class="addToTopPicks"> + Add to Top Picks</button></a>
+        <a href="#"><button class="review"> Leave a Review</button></a>
+        <!-- end the if statement -->
+    </div>
+    <div class="book-cover">
+        {% if book.cover %}
+            <img src="{{ book.cover.url }}" alt="{{ book.title }} Cover">
+        {% endif %}
+    </div>
+    <div class="bookinfo">
     <h1>{{ book.title }}</h1>
     <p><strong>Author:</strong> {{ book.author }}</p>
-    <p><strong>Description:</strong> {{ book.description }}</p>
     <p><strong>Genre:</strong> {{ book.genre }}</p>
-    <p><strong>Cover</strong> {{ book.cover }}</p>
+    <p class="description"><strong>Description:</strong> {{ book.description }}</p>
+    </div>
+
+    <div class="comments">
+        <p><strong>Comments</strong></p>
+    </div>
 </body>
-</html>
+{% endblock %}

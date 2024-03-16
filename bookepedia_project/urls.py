@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.urls import path 
 from django.urls import include 
 from bookepedia import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 """bookepedia URL Configuration
 
@@ -25,4 +27,4 @@ urlpatterns = [
     path('bookepedia/', include ('bookepedia.urls')),
     path('admin/', admin.site.urls),
     path('bookepedia/book/<slug:book_title_slug>/', views.show_book, name='show_book'),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

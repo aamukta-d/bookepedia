@@ -1,0 +1,68 @@
+
+.book-cover {
+    position: fixed;
+    left: 50px;
+    top: 150px;
+}
+
+.homepage {
+    position: fixed;
+    top: 60px;
+    left: 60px;
+}
+
+.addToTopPicks {
+    position: fixed;
+    top: 200px;
+    left: 700px;
+}
+
+.review {
+    position: fixed;
+    top: 200px;
+    left: 900px;
+}
+
+.bookinfo {
+    position: fixed;
+    left: 350px;
+    top: 150px;
+}
+
+.description {
+    max-width: 700px;
+}
+
+.comments {
+    position: fixed;
+    left:50px;
+    bottom: 130px;
+}
+
+h1 {
+    font-family: "Arial", sans-serif;
+    font-size: 30px;
+}
+
+p {
+    font-family: "Arial", sans-serif;
+    font-size: 20px;
+}
+
+.buttons button{
+    margin: 10px; /* Add some space between the buttons */
+    font-size: 14px;
+    font-family: "Times New Roman", Times, serif;
+    background-color: white; 
+    color: black;
+    padding: 10px 20px; /* Add padding to make the button larger */
+    border: 1px solid black; /* Remove default border */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: transform 0.3s; /* Smooth transition effect */
+}
+
+.buttons button:hover{
+    background-color: rgba(155,232,240,0.5);
+    transform: scale(1.1); /* Enlarge the button on hover */
+}
