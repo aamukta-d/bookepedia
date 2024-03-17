@@ -26,6 +26,9 @@ def add_a_book(request):
         form = BookForm(request.POST)
 
         if form.is_valid():
+
+            if 'cover' in request.FILES:
+                form.cover = request.FILES['cover'] 
     
             form.save(commit=True)
             return redirect('/bookepedia/')
