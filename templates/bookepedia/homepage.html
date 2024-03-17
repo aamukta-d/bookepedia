@@ -13,7 +13,7 @@
         <div class="buttons">
             {% if logged_in %}
                 <a href="{% url 'bookepedia:add_a_book' %}"><button class="add_a_book">&#x1F4D6; Add a Book</button></a>
-                <button class="my_profile">&#x1F464; My Profile</button>
+                <a href="{% url 'bookepedia:profile' request.user.username %}"><button class="my_profile">&#x1F464; My Profile</button></a>
             {% else %}
                 <a href="{% url 'bookepedia:register' %}"><button class="add_a_book">&#x1F464; Register</button></a>
                 <a href = "{% url 'bookepedia:user_login' %}"><button class="add_a_book">&#x1F464; Log In</button></a>

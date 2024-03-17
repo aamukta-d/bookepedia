@@ -1,0 +1,23 @@
+{% extends 'bookepedia/base.html' %} 
+{% load staticfiles %}
+{% block title_block %} 
+    Profile  for {{selected_user.username}}
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron p-4">
+    <div class="container">
+    <h1 class="jumbotron-heading">{{ selected_user.username }}'s Profile</h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+    <img src="{{ MEDIA_URL }}{{ user_profile.picture }}"
+    width="300"
+    height="300"
+    alt="{{ selected_user.username }}'s profile image" />
+    <br />
+</div>    
+
+{% endblock %}

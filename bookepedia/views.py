@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views import View
 from bookepedia.forms import BookForm
 from django.shortcuts import redirect
 from bookepedia.forms import UserForm, UserProfileForm
@@ -11,6 +12,8 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.contrib.auth.models import User
+from bookepedia.models import UserProfile
 # Create your views here.
 
 def homepage(request):
@@ -123,3 +126,26 @@ def user_login(request):
         
 
     return render(request, 'bookepedia/Login.html')
+
+class profile(View):
+    def get_user_details(self, username):
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return None
+        
+        user_profile = UserProfile.objects.get_or_create(user=user)[0]
+        form = UserProfileForm(instance=user_profile)
+        return (user, user_profile, form)
+
+    def get(self, request, username):
+        try:
+            (user, user_profile, form) = self.get_user_details(username)
+        except TypeError:
+            return redirect(reverse('bookepedia:register'))
+        
+        context_dict = {'user_profile': user_profile,
+                        'selected_user': user,
+                        'form': form}
+        
+        return render(request, 'bookepedia/user_profile.html', context_dict)
