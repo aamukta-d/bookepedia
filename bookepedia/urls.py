@@ -10,5 +10,5 @@ urlpatterns = [
     path('add_a_book', views.add_a_book, name = 'add_a_book'),
     path('register/', views.register, name = 'register'),
     path('login/', views.user_login, name='user_login' ),
-    path('profile/<username>', views.profile.as_view(), name='profile')
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('profile/<username>', views.Profile.as_view(), name='profile')
+]

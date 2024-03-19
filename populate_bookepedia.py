@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE',
                       'bookepedia_project.settings')
 import django
 django.setup() 
-from django.conf import settings
+from bookepedia_project import settings
 from bookepedia.models import Genre, Book
 
 
@@ -163,7 +163,7 @@ def populate():
             title = book_info['title']
             author = book_info['author']
             description = book_info['description']
-            cover = os.path.join(settings.MEDIA_URL, 'book_covers', book_info['cover'])
+            cover = os.path.join('book_covers', book_info['cover'])
             slug = f"{genre_name.lower().replace(' ', '-')}-{title.lower().replace(' ', '-')}"
 
             book = Book.objects.create(

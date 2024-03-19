@@ -45,10 +45,10 @@ class UserProfile(models.Model):
         return self.user.username
     
     def get_following(self):
-        return User.objects.filter(Following__followers=self.user)
+        return User.objects.filter(following__follower=self.user)
     
     def get_followers(self):
-        return User.objects.filter(Followers__followed=self.user)
+        return User.objects.filter(followers__followed=self.user)
 
 class UserFollowing(models.Model):
     follower = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="following", on_delete=models.CASCADE)

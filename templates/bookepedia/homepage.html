@@ -17,8 +17,27 @@
             {% else %}
                 <a href="{% url 'bookepedia:register' %}"><button class="add_a_book">&#x1F464; Register</button></a>
                 <a href = "{% url 'bookepedia:user_login' %}"><button class="add_a_book">&#x1F464; Log In</button></a>
-            {% endif %}
-           
+            {% endif %}  
         </div>
     </div>
+
+    <div class="container">
+        <h2>Recommended Books</h2>
+        <div class="recommended-books">
+            {% for book in recommended_books %}
+                <div class="book">
+                    <h3>{{ book.title }}</h3>
+                    <p>Author: {{ book.author }}</p>
+                    <p>Description: {{ book.description }}</p>
+                    <p>Genre: {{ book.genre }}</p>
+                    {% if book.cover %}
+                        <img src="{{ book.cover.url }}" alt="{{ book.title }} Cover">
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p>No recommended books available.</p>
+            {% endfor %}
+        </div>
+    </div>
+
 {% endblock %}
