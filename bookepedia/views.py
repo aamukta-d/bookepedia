@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
 from bookepedia.forms import BookForm
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from bookepedia.forms import UserForm, UserProfileForm
 from django.contrib.auth.models import User
 from .models import Genre
@@ -14,6 +14,8 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from bookepedia.models import UserProfile
+from django.contrib.auth.decorators import login_required
+from bookepedia.models import UserFollowing
 # Create your views here.
 
 def homepage(request):
@@ -144,8 +146,28 @@ class profile(View):
         except TypeError:
             return redirect(reverse('bookepedia:register'))
         
+        following = user_profile.get_following()
+        followers = user_profile.get_followers()
+        
         context_dict = {'user_profile': user_profile,
                         'selected_user': user,
-                        'form': form}
+                        'form': form,
+                        'following':following,
+                        'followers':followers
+                        }
         
         return render(request, 'bookepedia/user_profile.html', context_dict)
+
+
+@login_required
+def follow_user(request, username):
+    user_to_follow = get_object_or_404(User, username=username)
+    if request.user != user_to_follow:
+        UserFollowing.objects.get_or_create(follower=request.user, followed=user_to_follow)
+    return redirect('profile', username=username)
+
+@login_required
+def unfollow_user(request, username):
+    user_to_unfollow = get_object_or_404(User, username=username)
+    UserFollowing.objects.filter(follower=request.user, followed=user_to_unfollow).delete()
+    return redirect('profile', username=username)

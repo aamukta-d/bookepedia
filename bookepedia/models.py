@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
+from django.conf import settings
 
 class Genre(models.Model):
     name = models.CharField(max_length=128)
@@ -31,3 +32,24 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+    def get_following(self):
+        return User.objects.filter(Following__followers=self.user)
+    
+    def get_followers(self):
+        return User.objects.filter(Followers__followed=self.user)
+
+class UserFollowing(models.Model):
+    follower = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="following", on_delete=models.CASCADE)
+    followed = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="followers", on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+
+        constraints = [
+            models.UniqueConstraint(fields=['follower', 'followed'], name='unique_followers')
+        ]
+        ordering = ['-created']
+
+    def __str__(self):
+        return f"{self.follower.username} follows {self.followed.username}"
