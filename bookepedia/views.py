@@ -7,7 +7,7 @@ from bookepedia.forms import UserForm, UserProfileForm
 from django.contrib.auth.models import User
 from .models import Genre
 from .models import Book
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.urls import reverse
 from django.shortcuts import redirect
@@ -62,6 +62,12 @@ def search(request):
         if query:
             result_list = run_query(query)
     return render(request, 'bookepedia/search.html', {'result_list': result_list})
+
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('bookepedia:homepage'))
 
 def register(request):
 
