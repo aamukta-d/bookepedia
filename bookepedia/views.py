@@ -17,6 +17,7 @@ from bookepedia.models import UserProfile
 from django.contrib.auth.decorators import login_required
 from bookepedia.models import UserFollowing
 from bookepedia.models import UserBookInteraction , get_books_by_user_genre
+from bookepedia.bing_search import run_query
 
 # Create your views here.
 
@@ -54,6 +55,13 @@ def show_book(request, book_title_slug):
     book = Book.objects.get(slug=book_title_slug)
     return render(request, 'bookepedia/book.html', {'book':book})
 
+def search(request): 
+    result_list = []
+    if request.method == 'POST':
+        query = request.POST['query'].strip() 
+        if query:
+            result_list = run_query(query)
+    return render(request, 'bookepedia/search.html', {'result_list': result_list})
 
 def register(request):
 
