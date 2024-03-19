@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views import View
 from bookepedia.forms import BookForm
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from bookepedia.forms import UserForm, UserProfileForm
 from django.contrib.auth.models import User
 from .models import Genre
@@ -11,11 +12,23 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.contrib.auth.models import User
+from bookepedia.models import UserProfile
+from django.contrib.auth.decorators import login_required
+from bookepedia.models import UserFollowing
+from bookepedia.models import UserBookInteraction , get_books_by_user_genre
+from bookepedia.bing_search import run_query
+
 # Create your views here.
 
 def homepage(request):
     context_dict = {}
     context_dict['logged_in'] = request.user.is_authenticated
+    if request.user.is_authenticated:
+        user = request.user
+        exclude_books = UserBookInteraction.objects.filter(user=user).values_list('book_id', flat=True)
+        recommended_books = get_books_by_user_genre(user, limit=3)
+        context_dict['recommended_books'] = recommended_books
     
     return render(request, 'bookepedia/homepage.html', context = context_dict)
 
@@ -41,6 +54,14 @@ def add_a_book(request):
 def show_book(request, book_title_slug):
     book = Book.objects.get(slug=book_title_slug)
     return render(request, 'bookepedia/book.html', {'book':book})
+
+def search(request): 
+    result_list = []
+    if request.method == 'POST':
+        query = request.POST['query'].strip() 
+        if query:
+            result_list = run_query(query)
+    return render(request, 'bookepedia/search.html', {'result_list': result_list})
 
 def register(request):
 
@@ -117,9 +138,69 @@ def user_login(request):
             else:
                 messages.error(request, "Your account is disabled.")
         else:
-            messages.error(request, "Invalid login details provided.")
+            messages.error(request, "Invalid login details provided.") #takes you directly to register w/out giving another shot , CHANGE
 
-        return redirect(reverse('bookepedia:register'))
-        
+        return redirect(reverse('bookepedia:register'))    
 
     return render(request, 'bookepedia/Login.html')
+
+class Profile(View):
+    def get_user_details(self, username):
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return None
+        
+        user_profile, _ = UserProfile.objects.get_or_create(user=user)
+        form = UserProfileForm(instance=user_profile)
+        return user, user_profile, form
+
+    def get(self, request, username):
+        user, user_profile, form = self.get_user_details(username)
+        if user is None:
+            return redirect(reverse('bookepedia:register'))
+        
+        following = user_profile.get_following()
+        followers = user_profile.get_followers()
+
+        is_following = False
+        if request.user.is_authenticated:
+            is_following = UserFollowing.objects.filter(follower=request.user, followed=user).exists()
+
+        context_dict = {
+            'user_profile': user_profile,
+            'selected_user': user,
+            'form': form,
+            'following': following,
+            'followers': followers,
+            'is_following': is_following  
+        }
+
+        return render(request, 'bookepedia/user_profile.html', context_dict)
+
+    def post(self, request, username):
+        user, user_profile, form = self.get_user_details(username)
+        if user is None:
+            return redirect(reverse('bookepedia:register'))
+
+        is_following = False
+        if request.user.is_authenticated:
+            is_following = UserFollowing.objects.filter(follower=request.user, followed=user).exists()
+
+        if 'follow' in request.POST and not is_following:
+            UserFollowing.objects.get_or_create(follower=request.user, followed=user)
+            is_following = True
+        elif 'unfollow' in request.POST and is_following:
+            UserFollowing.objects.filter(follower=request.user, followed=user).delete()
+            is_following = False
+
+        context_dict = {
+            'user_profile': user_profile,
+            'selected_user': user,
+            'form': form,
+            'following': user_profile.get_following(),
+            'followers': user_profile.get_followers(),
+            'is_following': is_following  
+        }
+
+        return render(request, 'bookepedia/user_profile.html', context_dict)

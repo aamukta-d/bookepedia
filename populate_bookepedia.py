@@ -3,6 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE',
                       'bookepedia_project.settings')
 import django
 django.setup() 
+from bookepedia_project import settings
 from bookepedia.models import Genre, Book
 
 
