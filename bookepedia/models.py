@@ -24,6 +24,17 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+    
+class UserBookInteraction(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    rating = models.IntegerField(null=True,blank=True)
+    liked = models.BooleanField(default=False)
+
+def get_books_by_user_genre(user, limit=3):
+    preferred_genres = user.userprofile.top_genre.all()
+    recommended_books = Book.objects.filter(genre__in=preferred_genres).distinct()[:limit]
+    return recommended_books
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null = True)

@@ -16,6 +16,10 @@ from django.contrib.auth.models import User
 from bookepedia.models import UserProfile
 from django.contrib.auth.decorators import login_required
 from bookepedia.models import UserFollowing
+from bookepedia.models import UserBookInteraction , get_books_by_user_genre
+ 
+
+
 # Create your views here.
 
 def homepage(request):
@@ -46,6 +50,14 @@ def add_a_book(request):
 def show_book(request, book_title_slug):
     book = Book.objects.get(slug=book_title_slug)
     return render(request, 'bookepedia/book.html', {'book':book})
+
+def book_recommendations(request):
+    user = request.user
+    exclude_books = UserBookInteraction.objects.filter(user=user).values_list('book_id', flat=True)
+    recommended_books = get_books_by_user_genre(user, limit=3)
+    return render() #
+    
+    
 
 def register(request):
 
