@@ -19,11 +19,14 @@
         <div>
             <ul>
                 {% if user.is_authenticated %}
+                    <a href="{% url 'bookepedia:user_logout' %}">Logout</a>
+                    <a href="{% url 'bookepedia:add_a_book' %}"></a>
                 {% else %}
                 {% endif %}
-                    <a href="{% url 'bookepedia:add_a_book' %}">
                     <a href="{% url 'bookepedia:register' }">
                     <a href="{% url 'bookepedia:user_login'}">
+                    <a href="{% url 'bookepedia:search' %}">  
+                    
              </ul>
         </div>
     </body> 
