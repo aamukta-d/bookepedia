@@ -3,7 +3,7 @@ from .models import Book
 from django.contrib.auth.models import User
 from bookepedia.models import UserProfile
 from bookepedia.models import Genre
-
+from bookepedia.models import Comment
 
 class BookForm(forms.ModelForm):
     title = forms.CharField(max_length=128, help_text="Please enter the title of the book.")
@@ -33,3 +33,9 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('picture', 'top_genre',)
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('content')
+    

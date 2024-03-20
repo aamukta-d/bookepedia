@@ -36,6 +36,15 @@ def get_books_by_user_genre(user, limit=3):
     recommended_books = Book.objects.filter(genre__in=preferred_genres).distinct()[:limit]
     return recommended_books
 
+class Comment(models.Model):
+    book = models.ForeignKey(Book, related_name='comments', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f'Comment by {self.user.username} on {self.book.title}'
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null = True)
     top_genre = models.ManyToManyField(Genre)

@@ -17,6 +17,8 @@ from bookepedia.models import UserProfile
 from django.contrib.auth.decorators import login_required
 from bookepedia.models import UserFollowing
 from bookepedia.models import UserBookInteraction , get_books_by_user_genre
+from bookepedia.models import Comment
+from bookepedia.forms import CommentForm
  
 
 
@@ -49,7 +51,23 @@ def add_a_book(request):
 
 def show_book(request, book_title_slug):
     book = Book.objects.get(slug=book_title_slug)
-    return render(request, 'bookepedia/book.html', {'book':book})
+    comments = book.comments.all()
+    new_comment = None
+
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.book = book
+            new_comment.user = request.user
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+
+    return render(request, 'bookepedia/book.html', {'book':book, 
+                                                    'comments':comments, 
+                                                    'new_comment':new_comment, 
+                                                    'comment_form':comment_form})
 
 def book_recommendations(request):
     user = request.user
