@@ -54,10 +54,13 @@ def add_a_book(request):
     return render(request, 'bookepedia/add_a_book.html', {'form': form})
 
 def show_book(request, book_title_slug):
+    logged_in = request.user.is_authenticated
+    if request.user.is_authenticated:
+        user_profile = UserProfile.objects.get(user=request.user)
     book = Book.objects.get(slug=book_title_slug)
     comments = book.comments.all()
     new_comment = None
-
+    
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
@@ -71,7 +74,9 @@ def show_book(request, book_title_slug):
     return render(request, 'bookepedia/book.html', {'book':book, 
                                                     'comments':comments, 
                                                     'new_comment':new_comment, 
-                                                    'comment_form':comment_form})
+                                                    'comment_form':comment_form,
+                                                    'logged_in': logged_in,
+                                                    'user_profile': user_profile})
 
 def add_review(request, book_title_slug):
     book = Book.objects.get(slug=book_title_slug)
@@ -91,7 +96,8 @@ def add_review(request, book_title_slug):
 
 def all_books(request):
     books = Book.objects.all()
-    return render(request, 'bookepedia/all_books.html', {'books': books})
+    logged_in = request.user.is_authenticated
+    return render(request, 'bookepedia/all_books.html', {'books': books, 'logged_in':logged_in})
 
 def search(request): 
     result_list = []

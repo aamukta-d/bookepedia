@@ -12,10 +12,10 @@
     <div class="container">
         <div class = "buttons">
             <a href="{% url 'bookepedia:homepage' %}"><button class="homepage">&#x1F780; Back to Bookepedia Home</button></a>
-            <!-- Wrap in if logged in statment-->
+            {% if logged_in %}
             <a href="#"><button class="addToTopPicks"> + Add to Top Picks</button></a>
             <a href="{% url 'bookepedia:add_review' book.slug %}"><button class="review"> Leave a Review</button></a>
-            <!-- end the if statement -->
+            {% endif %}
         </div>
         <div class="book-cover">
             {% if book.cover %}
