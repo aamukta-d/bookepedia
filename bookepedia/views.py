@@ -73,6 +73,26 @@ def show_book(request, book_title_slug):
                                                     'new_comment':new_comment, 
                                                     'comment_form':comment_form})
 
+def add_review(request, book_title_slug):
+    book = Book.objects.get(slug=book_title_slug)
+    
+    if request.method == 'POST':
+        review_form = CommentForm(request.POST)
+        if review_form.is_valid():
+            new_review = review_form.save(commit=False)
+            new_review.book = book
+            new_review.user = request.user
+            new_review.save()
+            return redirect('bookepedia:show_book', book_title_slug=book_title_slug)
+    else:
+        review_form = CommentForm()
+    
+    return render(request, 'bookepedia/add_review.html', {'book': book, 'review_form': review_form})
+
+def all_books(request):
+    books = Book.objects.all()
+    return render(request, 'bookepedia/all_books.html', {'books': books})
+
 def search(request): 
     result_list = []
     if request.method == 'POST':

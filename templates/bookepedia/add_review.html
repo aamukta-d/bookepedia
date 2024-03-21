@@ -1,0 +1,18 @@
+{% extends 'bookepedia/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    Bookepedia - Add Review for {{ book.title }}
+{% endblock %}
+
+{% block body_block %}
+    <div class="container">
+        <h1>Add Review for {{ book.title }}</h1>
+        <div class="review-form">
+            <form method="post" action="{% url 'bookepedia:add_review' book.slug %}">
+                {% csrf_token %}
+                {{ review_form.as_p }}
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

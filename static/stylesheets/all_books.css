@@ -1,47 +1,13 @@
 .container{
     position: relative;
-    left: 50px;
-    top: 40px;
 }
 
-.book-cover{
-    position: relative;
-    max-width: 270px;
-    max-height: 420px;
-    top: 20px;
-}
-
-.bookinfo{
-    position: absolute;
-    font-size: 20px;
-    left:300px;
-    top: 50px;
-}
-
-.description{
-    max-width: 900px;
-}
-
-.addToTopPicks {
-    position: relative;
-    top: 150px;
-    left: 350px;
-    z-index: 1000;
-}
-
-.review {
-    position: relative;
-    top: 150px;
-    left: 380px;
-    z-index: 1000;
-}
-
-.comments{
-    position: relative;
-}
-
-.comment-content{
-    max-width: 900px;
+.buttons{
+    position: absolute; 
+    top: 50%; 
+    
+    right: 5%;
+    transform: translateY(-50%); 
 }
 
 .buttons button{

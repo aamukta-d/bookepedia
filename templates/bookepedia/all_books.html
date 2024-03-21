@@ -1,0 +1,41 @@
+{% extends 'bookepedia/base.html' %} 
+{%load staticfiles%}
+{% block title_block %} 
+    Bookepedia - Books
+{% endblock %}
+
+{% block body_block%}
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/all_books.css' %}">
+    </head>
+
+    <div class="container">
+        <img src="{% static 'images/logo.jpg' %}" class="logo"/>
+        <div class="buttons">
+            <!-- Wrap in if logged in statment-->
+            {% if logged_in %}
+                <a href="{% url 'bookepedia:add_a_book' %}"><button class="add_a_book">&#x1F4D6; Add a Book</button></a>
+                <a href="{% url 'bookepedia:profile' request.user.username %}"><button class="my_profile">&#x1F464; My Profile</button></a>
+                <a href="{% url 'bookepedia:user_logout' %}"><button class="logout">&#x1F6AA; Logout</button></a>
+            {% else %}
+                <a href="{% url 'bookepedia:register' %}"><button class="add_a_book">&#x1F464; Register</button></a>
+                <a href = "{% url 'bookepedia:user_login' %}"><button class="add_a_book">&#x1F464; Log In</button></a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        {% for book in books %}
+            <div class="books">
+                <a href="{% url 'bookepedia:show_book' book.slug %}"><h3>{{ book.title }}</h3></button></a>
+                <p>Author: {{ book.author }}</p>
+                <p>Description: {{ book.description }}</p>
+                <p>Genre: {{ book.genre }}</p>
+                {% if book.cover %}
+                    <img src="{{ book.cover.url }}" alt="{{ book.title }} Cover">
+                {% endif %}
+            </div>
+            {% endfor %}
+    </div>
+{% endblock %}

@@ -8,7 +8,7 @@ from bookepedia.models import Comment
 class BookForm(forms.ModelForm):
     title = forms.CharField(max_length=128, help_text="Please enter the title of the book.")
     author = forms.CharField(max_length=128, help_text="Please enter the author's name.")
-    description = forms.CharField(max_length=128, help_text="Please provide a short description.")
+    description = forms.CharField(max_length=600, help_text="Please provide a short description.")
 
     class Meta:
         model = Book
@@ -37,5 +37,5 @@ class UserProfileForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ('content')
+        fields = ('content',)
     
