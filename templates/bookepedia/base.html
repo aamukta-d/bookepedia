@@ -19,7 +19,7 @@
         <div>
             <ul>
                 {% if user.is_authenticated %}
-                    <a href="{% url 'bookepedia:user_logout' %}">Logout</a>
+                    <a href="{% url 'bookepedia:user_logout' %}"></a>
                     <a href="{% url 'bookepedia:add_a_book' %}"></a>
                 {% else %}
                 {% endif %}
