@@ -31,26 +31,26 @@ def homepage(request):
         exclude_books = UserBookInteraction.objects.filter(user=user).values_list('book_id', flat=True)
         recommended_books = get_books_by_user_genre(user, limit=3)
         context_dict['recommended_books'] = recommended_books
+        user_profile = UserProfile.objects.get(user=user) 
+        friends_list = user_profile.get_following()
+        context_dict['friend_list'] = friends_list
+
     
     return render(request, 'bookepedia/homepage.html', context = context_dict)
 
 def add_a_book(request):
-    form = BookForm()
-
     if request.method == 'POST':
-        form = BookForm(request.POST)
-
+        form = BookForm(request.POST, request.FILES)
         if form.is_valid():
+            
+            cover = request.FILES.get('cover')
+            form.instance.cover = cover  
 
-            if 'cover' in request.FILES:
-                form.cover = request.FILES['cover'] 
-    
-            form.save(commit=True)
+            form.save()
             return redirect('/bookepedia/')
-           
-        else:
-            print(form.errors)
-
+    else:
+        form = BookForm()
+    
     return render(request, 'bookepedia/add_a_book.html', {'form': form})
 
 def show_book(request, book_title_slug):

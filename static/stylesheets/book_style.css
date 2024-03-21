@@ -1,8 +1,10 @@
-
 .book-cover {
     position: fixed;
     left: 50px;
     top: 150px;
+    width: 200px; 
+    height: auto; 
+    display: block; 
 }
 
 .homepage {

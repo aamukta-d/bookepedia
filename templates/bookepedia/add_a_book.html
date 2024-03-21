@@ -12,7 +12,7 @@
         <h1>Add a Book</h1>  
     </div>   
     <div class ="form">
-        <form id="book_form" method="post" action="{% url 'bookepedia:add_a_book' %}"> 
+        <form id="book_form" method="post" action="{% url 'bookepedia:add_a_book' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {% for hidden in form.hidden_fields %}
                 {{ hidden }}

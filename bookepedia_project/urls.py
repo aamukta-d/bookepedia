@@ -26,5 +26,4 @@ from django.urls import path
 urlpatterns = [
     path('bookepedia/', include ('bookepedia.urls')),
     path('admin/', admin.site.urls),
-    path('bookepedia/book/<slug:book_title_slug>/', views.show_book, name='show_book'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -13,4 +13,5 @@ urlpatterns = [
     path('profile/<username>', views.Profile.as_view(), name='profile'),
     path('search/', views.search, name='search'),
     path('logout/', views.user_logout, name='user_logout'),
+    path('book/<slug:book_title_slug>/', views.show_book, name='show_book'),
 ]
