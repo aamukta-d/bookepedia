@@ -34,7 +34,7 @@
         <div class="comments">
             <h2>Comments</h2>
             {% for comment in book.comments.all %}
-                <img src="{{ MEDIA_URL }}{{ user_profile.picture }}" width="100" height="100" class="user_picture"><br />
+                <img src="{{ MEDIA_URL }}{{ user_profile.picture }}" width="100" height="100" class="user_picture">
                 <p class="username">{{comment.user.username }}</p> <!--Add href to user profile-->
                 <p class="user_comment">{{ comment.content }}</p>
             {% empty %}
