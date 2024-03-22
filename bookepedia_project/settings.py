@@ -30,7 +30,7 @@ SECRET_KEY = '^9n^y+8=idd+g(u=i7ir@a#$l43*l3qwc8-^-htoe*z8qg^!fe'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['aamukta.pythonanywhere.com']
 
 
 # Application definition
@@ -87,7 +87,8 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = ['aamukta.pythonanywhere.com']
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

@@ -48,6 +48,7 @@ def add_a_book(request):
     return render(request, 'bookepedia/add_a_book.html', {'form': form})
 
 def show_book(request, book_title_slug):
+    context_dict = {}
     logged_in = request.user.is_authenticated
     if request.user.is_authenticated:
          
@@ -70,7 +71,7 @@ def show_book(request, book_title_slug):
     else:
         comment_form = CommentForm()
 
-    context_dict = {}
+    
     context_dict['book'] = book
     context_dict['comments'] = comments
     context_dict['new_comment'] = new_comment
@@ -176,7 +177,7 @@ def register(request):
         user_form = UserForm()
         profile_form = UserProfileForm()
 
-    return render(request, 'bookepedia/registration.html', 
+    return render(request, 'bookepedia/Registration.html', 
     {
         'user_form': user_form,
         'profile_form': profile_form,
