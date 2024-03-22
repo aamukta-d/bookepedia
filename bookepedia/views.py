@@ -53,6 +53,8 @@ def show_book(request, book_title_slug):
          
         user_profile = UserProfile.objects.get(user=request.user)
         books = user_profile.top_picks.all()
+        context_dict['books'] = books
+        context_dict['user_profile'] = user_profile
 
     book = Book.objects.get(slug=book_title_slug)
     comments = book.comments.all()
@@ -68,13 +70,14 @@ def show_book(request, book_title_slug):
     else:
         comment_form = CommentForm()
 
-    return render(request, 'bookepedia/book.html', {'book':book,
-                                                    'books':books,
-                                                    'comments':comments, 
-                                                    'new_comment':new_comment, 
-                                                    'comment_form':comment_form,
-                                                    'logged_in': logged_in,
-                                                    'user_profile': user_profile})
+    context_dict = {}
+    context_dict['book'] = book
+    context_dict['comments'] = comments
+    context_dict['new_comment'] = new_comment
+    context_dict['comment_form'] = comment_form
+    context_dict['logged_in'] = logged_in
+    
+    return render(request, 'bookepedia/book.html', context_dict)
 
 def add_review(request, book_title_slug):
     book = Book.objects.get(slug=book_title_slug)
