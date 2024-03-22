@@ -13,7 +13,7 @@
 <div class="container">
     <div class="buttons">
         <a href="{% url 'bookepedia:homepage' %}"><button class="homepage">&#x1F780; Back to Bookepedia Home</button></a>
-        <a href="{% url 'bookepedia:all_books' %}"><button class="all_books">&#x1F4D6; Browse All Books</button></a> 
+        <a href="{% url 'bookepedia:all_books' %}"><button class="book page">&#x1F780; View Book Details</button></a>
     </div>
     <h1 class="username">{{ selected_user.username }}</h1>
     <img src="{{ MEDIA_URL }}{{ user_profile.picture }}" width="250" height="250"
