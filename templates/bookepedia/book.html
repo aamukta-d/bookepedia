@@ -13,7 +13,9 @@
         <div class = "buttons">
             <a href="{% url 'bookepedia:homepage' %}"><button class="homepage">&#x1F780; Back to Bookepedia Home</button></a>
             {% if logged_in %}
-            <a href="{% url 'bookepedia:add_to_top_picks' book.slug %}"><button class="addToTopPicks"> + Add to Top Picks</button></a>
+            {% if book not in books %}
+                <button id="like_btn" class="addToTopPicks" type="button" data-book-slug="{{ book.slug }}"> + Add to Top Picks</button>
+            {% endif %}
             <a href="{% url 'bookepedia:add_review' book.slug %}"><button class="review"> Leave a Review</button></a>
             {% endif %}
         </div>
