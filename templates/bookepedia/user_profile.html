@@ -4,23 +4,6 @@
     {{ selected_user.username }}'s Profile
 {% endblock %}
 {% block body_block %}
-<!--
-<div class="jumbotron p-4">
-    <div class="container">
-    <h1 class="jumbotron-heading">{{ selected_user.username }}'s Profile</h1>
-    {% if request.user.is_authenticated and request.user != selected_user %}
-        <form method="post" class="d-inline">
-            {% csrf_token %}
-            {% if is_following %}
-                <button type="submit" name="unfollow" class="btn btn-danger">Unfollow</button>
-            {% else %}
-                <button type="submit" name="follow" class="btn btn-primary">Follow</button>
-            {% endif %}
-        </form>
-    {% endif %}
-    </div>
-</div>
--->
 
 <head>
     <meta charset="UTF-8">

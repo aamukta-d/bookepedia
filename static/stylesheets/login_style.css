@@ -29,17 +29,17 @@ input[type="submit"] {
 }
 
 input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
+    background-color: white;
+    color: black;
     cursor: pointer;
 }
 
 input[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: rgba(155,232,240,0.5);
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus {
-    border-color: #4CAF50;
+    border-color: rgba(155,232,240,0.5);
     outline: none;
 }
