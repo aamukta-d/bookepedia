@@ -53,5 +53,11 @@ h2{
 .homepage{
     position: absolute;
     top: 70px;
-    left: 120px;
+    left: 100px;
+}
+
+.book_page{
+    position: absolute;
+    top: 70px;
+    left: 300px;
 }
