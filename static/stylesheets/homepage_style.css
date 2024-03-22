@@ -2,6 +2,11 @@
     position: relative;
 }
 
+.book_info{
+    position: absolute;
+    left: 300px;
+}
+
 .buttons{
     position: absolute; 
     top: 50%; 

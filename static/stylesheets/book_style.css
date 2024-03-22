@@ -34,25 +34,6 @@
     z-index: 1000;
 }
 
-.comments{
-    position: relative;
-}
-
-.comment{
-    max-width: 900px;
-}
-
-.username{
-    position: relative;
-    left: 120px;
-    bottom: 120px;
-}
-
-.user_comment{
-    position: relative;
-    left: 120px;
-    bottom: 120px;
-}
 
 .buttons button{
     margin: 10px; /* Add some space between the buttons */

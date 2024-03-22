@@ -26,14 +26,14 @@
         <h2>Recommended Books</h2>
         <div class="recommended-books">
             {% for book in recommended_books %}
-                <div class="book">
+                <div class="book_info">
                     <h3><a href="{% url 'bookepedia:show_book' book_title_slug=book.slug %}">{{ book.title }}</a></h3>
                     <p>Author: {{ book.author }}</p>
                     <p>Description: {{ book.description }}</p>
                     <p>Genre: {{ book.genre }}</p>
-                </div>
+                </div><br />
                     {% if book.cover %}
-                        <img src="{{ book.cover.url }}" alt="{{ book.title }} Cover">
+                        <img src="{{ book.cover.url }}" alt="{{ book.title }} Cover" width="260" height="400">
                     {% endif %}
             {% empty %}
                 <p>No recommended books available.</p>
