@@ -49,6 +49,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null = True)
     top_genre = models.ManyToManyField(Genre)
     picture = models.ImageField(upload_to='profile_images', blank=True)
+    top_picks = models.ManyToManyField(Book, blank=True)
 
     def __str__(self):
         return self.user.username

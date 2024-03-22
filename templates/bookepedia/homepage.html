@@ -31,16 +31,17 @@
                     <p>Author: {{ book.author }}</p>
                     <p>Description: {{ book.description }}</p>
                     <p>Genre: {{ book.genre }}</p>
+                </div>
                     {% if book.cover %}
                         <img src="{{ book.cover.url }}" alt="{{ book.title }} Cover">
                     {% endif %}
-                </div>
             {% empty %}
                 <p>No recommended books available.</p>
             {% endfor %}
         </div>
     </div>
 
+    <!--
     <div class="container">
         <h2>Friends</h2>
         <div class="friends_list">
@@ -59,5 +60,6 @@
             {% endfor %}
         </div>
     </div>
+    -->
 
 {% endblock %}

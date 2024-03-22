@@ -1,4 +1,10 @@
+{% extends 'bookepedia/base.html' %} 
+{%load staticfiles%}
+{% block title_block %} 
+    {{ selected_user.username }}'s Profile
+{% endblock %}
 {% block body_block %}
+<!--
 <div class="jumbotron p-4">
     <div class="container">
     <h1 class="jumbotron-heading">{{ selected_user.username }}'s Profile</h1>
@@ -14,14 +20,36 @@
     {% endif %}
     </div>
 </div>
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/user_profile.css' %}">
+</head>
 
 <div class="container">
-    <div class="row">
-    <img src="{{ MEDIA_URL }}{{ user_profile.picture }}"
-    width="300"
-    height="300"
+    <div>
+    <a href="{% url 'bookepedia:homepage' %}"><button class="homepage">&#x1F780; Back to Bookepedia Home</button></a>
+    </div>
+    <h1 class="username">{{ selected_user.username }}</h1>
+    <img src="{{ MEDIA_URL }}{{ user_profile.picture }}" width="250" height="250"
     alt="{{ selected_user.username }}'s profile image" />
     <br />
-</div>    
+    
+    <h2>{{ selected_user.username }}'s Top Picks</h2>
+    <div class="top_picks">
+        {% for book in user_profile.top_picks.all %}
+        <div class="book_info">
+            <a href="{% url 'bookepedia:show_book' book.slug %}"><h3>{{ book.title }}</h3></button></a>
+            <p>Author: {{ book.author }}</p>
+        </div>
+        {% if book.cover %}
+        <img src="{{ book.cover.url }}" alt="{{ book.title }} Cover" width="100" height="170">
+        {% endif %}
+    </div>
+    {% empty %}
+    <p>No books in top picks yet.</p>
+    {% endfor %}
+</div>
 
 {% endblock %}

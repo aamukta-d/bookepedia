@@ -13,13 +13,13 @@
         <div class = "buttons">
             <a href="{% url 'bookepedia:homepage' %}"><button class="homepage">&#x1F780; Back to Bookepedia Home</button></a>
             {% if logged_in %}
-            <a href="#"><button class="addToTopPicks"> + Add to Top Picks</button></a>
+            <a href="{% url 'bookepedia:add_to_top_picks' book.slug %}"><button class="addToTopPicks"> + Add to Top Picks</button></a>
             <a href="{% url 'bookepedia:add_review' book.slug %}"><button class="review"> Leave a Review</button></a>
             {% endif %}
         </div>
         <div class="book-cover">
             {% if book.cover %}
-                <img src="{{ book.cover.url }}" alt="{{ book.title }} Cover">
+                <img src="{{ book.cover.url }}" alt="{{ book.title }} Cover" width="270" height="400">
             {% endif %}
         </div>
         <div class="bookinfo">
@@ -32,12 +32,9 @@
         <div class="comments">
             <h2>Comments</h2>
             {% for comment in book.comments.all %}
-                <div class="comment">
-                    <div class="comment-content">
-                        <p>{{ comment.content }} - {{comment.user.username }}</p>
-                        <img src="{{ MEDIA_URL }}{{ user_profile.picture }}">
-                    </div>
-                </div>
+                <img src="{{ MEDIA_URL }}{{ user_profile.picture }}" width="100" height="100" class="user_picture">
+                <p class="username">{{comment.user.username }}</p> <!--Add href to user profile-->
+                <p class="user_comment">{{ comment.content }}</p>
             {% empty %}
                 <p>No comments yet.</p>
             {% endfor %}

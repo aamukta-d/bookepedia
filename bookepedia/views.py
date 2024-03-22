@@ -94,6 +94,15 @@ def add_review(request, book_title_slug):
     
     return render(request, 'bookepedia/add_review.html', {'book': book, 'review_form': review_form})
 
+def add_to_top_picks(request, book_slug):
+    book = Book.objects.get(slug=book_slug)
+    user_profile = UserProfile.objects.get(user=request.user)
+
+    if book not in user_profile.top_picks.all():
+        user_profile.top_picks.add(book)
+
+    return redirect('bookepedia:show_book', book.slug)
+
 def all_books(request):
     books = Book.objects.all()
     logged_in = request.user.is_authenticated

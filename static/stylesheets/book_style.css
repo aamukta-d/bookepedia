@@ -1,13 +1,11 @@
 .container{
     position: relative;
-    left: 50px;
+    left: 70px;
     top: 40px;
 }
 
 .book-cover{
     position: relative;
-    max-width: 270px;
-    max-height: 420px;
     top: 20px;
 }
 
@@ -40,8 +38,20 @@
     position: relative;
 }
 
-.comment-content{
+.comment{
     max-width: 900px;
+}
+
+.username{
+    position: relative;
+    left: 120px;
+    bottom: 120px;
+}
+
+.user_comment{
+    position: relative;
+    left: 120px;
+    bottom: 120px;
 }
 
 .buttons button{

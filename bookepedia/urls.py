@@ -16,4 +16,5 @@ urlpatterns = [
     path('books/<slug:book_title_slug>/', views.show_book, name='show_book'),
     path('books/<slug:book_title_slug>/add_review/', views.add_review, name='add_review'),
     path('books/', views.all_books, name='all_books'),
+    path('book/<slug:book_slug>/add_to_top_picks/', views.add_to_top_picks, name='add_to_top_picks'),
 ]
