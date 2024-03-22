@@ -89,11 +89,6 @@ DATABASES = {
 
 ALLOWED_HOSTS = ['aamukta.pythonanywhere.com']
 
-key = None
-with open('bing.key') as f:
-    key = f.read().strip()
-SECRET_KEY = key
-
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
