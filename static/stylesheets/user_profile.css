@@ -1,6 +1,5 @@
 .container{
     position: relative;
-    left: 100px;
 }
 
 .username{
@@ -12,4 +11,9 @@
 .book_info{
     position: absolute;
     left: 120px;
+}
+
+.book_entry{
+    position: relative;
+    left: 100px;
 }
