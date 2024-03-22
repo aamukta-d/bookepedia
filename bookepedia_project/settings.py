@@ -30,7 +30,7 @@ SECRET_KEY = '^9n^y+8=idd+g(u=i7ir@a#$l43*l3qwc8-^-htoe*z8qg^!fe'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['aamukta.pythonanywhere.com']
+ALLOWED_HOSTS = ['aamukta.pythonanywhere.com', '127.0.0.1']
 
 
 # Application definition
