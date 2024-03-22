@@ -27,3 +27,14 @@
     background-color: rgba(155,232,240,0.5);
     transform: scale(1.1); /* Enlarge the button on hover */
 }
+
+.search-container {
+    text-align: center;
+    margin-bottom: 20px; /* Adjust this value as needed */
+}
+
+.search-container form {
+    display: inline-block;
+    vertical-align: middle; /* Aligns the form vertically with the button */
+}
+

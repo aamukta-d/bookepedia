@@ -22,14 +22,14 @@
 
 .addToTopPicks {
     position: relative;
-    top: 150px;
+    top: 170px;
     left: 350px;
     z-index: 1000;
 }
 
 .review {
     position: relative;
-    top: 150px;
+    top: 170px;
     left: 380px;
     z-index: 1000;
 }

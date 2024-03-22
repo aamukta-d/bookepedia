@@ -12,10 +12,15 @@
 <img src="{% static 'images/login.jpg' %}" class="Loginlogo"/>
 <form id="login_form" method="post" action="{% url 'bookepedia:user_login' %}">
     {% csrf_token %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger" role="alert">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
     Username: <input type="text" name="username" value="" size="50" />
     <br />
     Password: <input type="password" name="password" value="" size="50" />
     <br />
-    <input type="submit" value="submit" />
+    <input type="submit" value="Submit" />
     </form>
 {% endblock %}

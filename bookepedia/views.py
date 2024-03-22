@@ -162,10 +162,9 @@ def register(request):
             if 'top_genre' in request.POST:
                 selected_genre_names = request.POST.getlist('top_genre')  
                 
-                # Retrieve Genre objects based on the selected genre names
                 selected_genres = Genre.objects.filter(name__in=selected_genre_names)
                 
-                # Set the selected genres for the UserProfile instance
+
                 profile.top_genre.set(selected_genres)
 
             profile.save()
@@ -202,9 +201,9 @@ def user_login(request):
             else:
                 messages.error(request, "Your account is disabled.")
         else:
-            messages.error(request, "Invalid login details provided.") #takes you directly to register w/out giving another shot , CHANGE
+            messages.error(request, "Invalid login details provided. Register instead?") #takes you directly to register w/out giving another shot , CHANGE
 
-        return redirect(reverse('bookepedia:register'))    
+       # return redirect(reverse('bookepedia:register'))    
 
     return render(request, 'bookepedia/Login.html')
 
