@@ -56,7 +56,10 @@ def add_a_book(request):
 def show_book(request, book_title_slug):
     logged_in = request.user.is_authenticated
     if request.user.is_authenticated:
+         
         user_profile = UserProfile.objects.get(user=request.user)
+        books = user_profile.top_picks.all()
+
     book = Book.objects.get(slug=book_title_slug)
     comments = book.comments.all()
     new_comment = None
@@ -71,7 +74,8 @@ def show_book(request, book_title_slug):
     else:
         comment_form = CommentForm()
 
-    return render(request, 'bookepedia/book.html', {'book':book, 
+    return render(request, 'bookepedia/book.html', {'book':book,
+                                                    'books':books,
                                                     'comments':comments, 
                                                     'new_comment':new_comment, 
                                                     'comment_form':comment_form,
@@ -97,10 +101,11 @@ def add_review(request, book_title_slug):
 def add_to_top_picks(request, book_slug):
     book = Book.objects.get(slug=book_slug)
     user_profile = UserProfile.objects.get(user=request.user)
-
+    
     if book not in user_profile.top_picks.all():
         user_profile.top_picks.add(book)
 
+  
     return redirect('bookepedia:show_book', book.slug)
 
 def all_books(request):
